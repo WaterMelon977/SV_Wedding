@@ -40,7 +40,7 @@ const Section = styled.section`
 const Left = styled.div`
   width: 50%;
   font-size: ${(props) => props.theme.fontlg};
-  font-family: Lora, serif;
+  // font-family: Lora, serif;
   font-weight: 300;
   position: sticky;
   top: 6rem;
@@ -51,6 +51,8 @@ const Left = styled.div`
   padding: 2rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   word-break: break-word;
+  margin-top: 10%;
+  padding: 2rem;
 
   strong {
     font-weight: 800;
