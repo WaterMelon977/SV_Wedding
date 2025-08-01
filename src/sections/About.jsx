@@ -12,6 +12,7 @@ const Section = styled.section`
   position: relative;
   display: flex;
   gap: 2rem;
+  align-items: flex-start;
 
   @media (max-width: 64em) {
     width: 95vw;
@@ -41,8 +42,9 @@ const Left = styled.div`
   font-size: ${(props) => props.theme.fontlg};
   font-family: Lora, serif;
   font-weight: 300;
-  position: relative;
-  z-index: 5;
+  position: sticky;
+  top: 6rem;
+  // z-index: 5;
   margin-top: 10%;
   background: rgba(255,255,255,0.7);
   border-radius: 16px;
@@ -60,6 +62,8 @@ const Left = styled.div`
     margin-top: 2rem;
     padding: 1.5rem 1rem;
     font-size: ${(props) => props.theme.fontmd};
+    position: static;
+    top: unset;
   }
   @media (max-width: 48em) {
     width: 98%;
@@ -67,6 +71,8 @@ const Left = styled.div`
     padding: 1rem 0.5rem;
     font-size: ${(props) => props.theme.fontsm};
     background: rgba(255,255,255,0.9);
+    position: static;
+    top: unset;
   }
   @media (max-width: 30em) {
     width: 100%;
@@ -74,6 +80,8 @@ const Left = styled.div`
     padding: 0.5rem 0.2rem;
     font-size: 1rem;
     border-radius: 8px;
+    position: static;
+    top: unset;
   }
 `;
 
@@ -213,8 +221,8 @@ With love and anticipation,
         <img width="400" height="800" src={img1} alt="About Us" />
         <img
           width="400"
-          height="600"
-          className="small-img-1"
+          height="800"
+          // className="small-img-1"
           src={img2}
           alt="About Us"
           data-scroll
@@ -222,8 +230,8 @@ With love and anticipation,
         />
         <img
           width="400"
-          height="600"
-          className="small-img-2"
+          height="800"
+          // className="small-img-2"
           src={img3}
           alt="About Us"
           data-scroll
