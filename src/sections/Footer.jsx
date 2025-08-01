@@ -126,16 +126,58 @@ const Footer = () => {
   return (
     <Section>
       <LogoContainer>
-        <img
-          width="300"
-          height="300"
-          src={Logo}
-          alt="Wibe"
-          data-scroll
-          data-scroll-speed="2"
-        />
-        <h3 data-scroll data-scroll-speed="-1">
-          Wibe Studio
+        <motion.svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 600 400"
+                  width="300px"
+                  height="200px"
+                  style={{ display: 'block' }}
+                >
+                  {/* S letter */}
+                  <motion.text
+                    x="30"
+                    y="220"
+                    fontFamily="'Dancing Script', 'Brush Script MT', cursive"
+                    fontSize="120"
+                    fill="#fff"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, delay: 0 }}
+                  >
+                    S
+                  </motion.text>
+                
+                  {/* Heart - Emoji-like and large */}
+                  <motion.path
+                    d="M300 180 
+                       C300 100, 420 100, 420 180 
+                       C420 260, 300 320, 300 320 
+                       C300 320, 180 260, 180 180 
+                       C180 100, 300 100, 300 180Z"
+                    fill="#e63946"
+                    stroke="#fff"
+                    strokeWidth="10"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: [0, 1.2, 1], opacity: 1 }}
+                    transition={{ duration: 1.2, delay: 1, type: 'spring', stiffness: 180 }}
+                  />
+                
+                  {/* V letter */}
+                  <motion.text
+                    x="480"
+                    y="220"
+                    fontFamily="'Dancing Script', 'Brush Script MT', cursive"
+                    fontSize="120"
+                    fill="#fff"
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, delay: 2 }}
+                  >
+                    V
+                  </motion.text>
+                </motion.svg>
+        <h3 data-scroll data-scroll-speed="-1" style={{ fontFamily: "Dancing Script" }}>
+          Sandhya & Vishal's Wedding
         </h3>
       </LogoContainer>
       <FooterComponent
@@ -148,25 +190,20 @@ const Footer = () => {
       >
         <ul>
           <li aria-hidden="true" onClick={() => handleScroll("#home")}>
-            home
+            Video Glimpse
           </li>
           <li aria-hidden="true" onClick={() => handleScroll(".about")}>
-            about
+            Invite 
           </li>
           <li aria-hidden="true" onClick={() => handleScroll("#shop")}>
-            shop
+            Jarabala's Invite
           </li>
           <li aria-hidden="true" onClick={() => handleScroll(".new-arrival")}>
-            new arrival
+            Snapshots
           </li>
           <li>
             <a href="https://google.com" target={"_blank"} rel="noreferrer">
-              look book
-            </a>
-          </li>
-          <li>
-            <a href="https://google.com" target={"_blank"} rel="noreferrer">
-              reviews
+              Youtube live
             </a>
           </li>
         </ul>
@@ -176,7 +213,7 @@ const Footer = () => {
             data-scroll-speed="2"
             data-scroll-direction="horizontal"
           >
-            &copy; 2022. All Rights Reserved.
+            
           </span>
           <span
             data-scroll
@@ -185,11 +222,11 @@ const Footer = () => {
           >
             Made with &hearts; by{" "}
             <a
-              href="http://devdreaming.com"
+              href="https://github.com/WaterMelon977"
               target={"_blank"}
               rel="dofollow noreferrer"
             >
-              CodeBucks
+              Santosh & Sumanth 
             </a>
           </span>
         </Bottom>

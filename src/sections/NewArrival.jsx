@@ -4,10 +4,18 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import React, {  useLayoutEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-import img1 from '../assets/Images/11.webp';
-import img2 from '../assets/Images/12.webp';
-import img3 from '../assets/Images/13.webp';
-import img4 from '../assets/Images/14.webp';
+import img1 from '../assets/Images/g1.JPG';
+import img2 from '../assets/Images/g2.JPG';
+import img3 from '../assets/Images/g3.JPG';
+import img4 from '../assets/Images/g4.JPG';
+import img5 from '../assets/Images/g5.JPG';
+import img6 from '../assets/Images/g6.JPG';
+import img7 from '../assets/Images/g7.JPG';
+import img8 from '../assets/Images/g8.JPG';
+import img9 from '../assets/Images/g9.JPG';
+import img10 from '../assets/Images/g10.JPG';
+import img11 from '../assets/Images/g11.JPG';
+import img12 from '../assets/Images/g12.JPG';
 
 const Section = styled.section`
   min-height: 100vh;
@@ -91,7 +99,7 @@ const Container = styled.div`
 
 const Title = styled(motion.h1)`
   font-size: ${(props) => props.theme.fontxxxl};
-  font-family: 'Kaushan Script';
+  font-family: 'Dancing Script';
   font-weight: 300;
   /* text-transform: capitalize; */
   color: ${(props) => props.theme.body};
@@ -145,11 +153,11 @@ const Item = styled.div`
     z-index: 5;
   }
 `;
-const Photos = ({ img, name }) => {
+const Photos = ({ img }) => {
   return (
     <Item>
-      <img width="400" height="600" src={img} alt={name} />
-      <h2>{name}</h2>
+      <img width="400" height="600" src={img} alt="gallery_pics" />
+      {/* <h2>{name}</h2> */}
     </Item>
   );
 };
@@ -168,7 +176,7 @@ const NewArrival = () => {
 let t1= gsap.timeline();
     setTimeout(() => {
       let mainHeight = scrollingElement.scrollHeight;
-      element.style.height = `calc(${mainHeight / 4}px)`;
+      element.style.height = `calc(${mainHeight / 10}px)`;
       t1.to(element, {
         scrollTrigger: {
           trigger: element,
@@ -218,28 +226,39 @@ let t1= gsap.timeline();
       <Title
         data-scroll data-scroll-speed="-2" data-scroll-direction="horizontal"
       >
-        New Arrivals
+        Snapshots
       </Title>
 
       <Container ref={ScrollingRef}>
+        <Photos img={img9} name="Accessories" />
+        <Photos img={img10} name="Shoes" />
+        <Photos img={img11} name="Formal Wear" />
+        <Photos img={img12} name="Party Wear" />
         <Photos img={img1} name="Denim" />
         <Photos img={img2} name="Cool Dresses" />
         <Photos img={img3} name="Jackets" />
         <Photos img={img4} name="T-shirts" />
+        <Photos img={img5} name="Sweatshirts" />
+        <Photos img={img6} name="Sweaters" />
+        <Photos img={img7} name="Pants" />
+        <Photos img={img8} name="Shorts" />
+        
       </Container>
 
       <Text data-scroll data-scroll-speed="-4">
-        There is new collection available for cool clothes in all sizes. This collection
-        is a great way to find a new look for you. It offers a variety of cool apparel
-        styles to fit your taste, while you can also find some cool clothes that you can
-        wear everyday.
+        From laughter-filled rituals to quiet stolen glances — our big day was nothing short of magical.
         <br />
         <br />
-        The first line of clothing you will see on this collection is for men. The
-        collection also includes three new styles for women.
+
+We've gathered some of our favorite memories in this photo gallery, and we'd love for you to relive those precious moments with us.
         <br />
         <br />
-        Give it a try and experience a new look.
+
+<strong>Click</strong> on any picture to enter gallery mode — the smiles, the chaos, the love… it's all there, waiting for you.
+        <br />
+        <br />
+
+Whether you were with us in person or in spirit, we hope these images bring a little joy to your heart — just like you brought to ours.
       </Text>
     </Section>
   );
