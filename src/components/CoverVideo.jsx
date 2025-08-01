@@ -39,27 +39,36 @@ const Title = styled(motion.div)`
   right: 0;
   bottom: 0;
   z-index: 5;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: ${(props) => props.theme.text};
+  padding: 0 1rem;
+  text-align: center;
 
-  div {
+  .title-row {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    word-break: keep-all;
+    margin-bottom: 0.5rem;
   }
 
   h1 {
     font-family: "Dancing Script";
     font-size: ${(props) => props.theme.fontBig};
-
     text-shadow: 1px 1px 1px ${(props) => props.theme.body};
-
+    margin: 0 0.1em;
+    white-space: pre;
+    line-height: 1.1;
+    @media (max-width: 48em) {
+      font-size: calc(2.5rem + 6vw);
+    }
     @media (max-width: 30em) {
-      /* font-size: ${(props) => props.theme.fontxxxl}; */
-      font-size: calc(5rem + 8vw);
+      font-size: calc(2rem + 8vw);
+      line-height: 1.2;
     }
   }
   h2 {
@@ -68,13 +77,13 @@ const Title = styled(motion.div)`
     font-weight: 500;
     text-shadow: 1px 1px 1px ${(props) => props.theme.body};
     margin: 0 auto;
-
     text-transform: capitalize;
-
+    @media (max-width: 48em) {
+      font-size: calc(1.2rem + 2vw);
+    }
     @media (max-width: 30em) {
       font-size: ${(props) => props.theme.fontmd};
-      /* font-size: calc(5rem + 8vw); */
-      margin-top: -1.5rem;
+      margin-top: 0.5rem;
     }
   }
 `;
@@ -101,31 +110,28 @@ const CoverVideo = () => {
       <DarkOverlay />
 
       <Title variants={container} initial="hidden" animate="show">
-        <div>
-  {"Sandhya & Vishal".split("").map((char, index) => (
-    <motion.h1
-      key={index}
-      variants={item}
-      data-scroll
-      data-scroll-delay={(0.13 - index * 0.01).toFixed(2)}
-      data-scroll-speed="4"
-      font-family="Dancing Script"
-    >
-      {char === " " ? "\u00A0" : char}
-    </motion.h1>
-  ))}
-</div>
+        <div className="title-row">
+          {"Sandhya & Vishal".split("").map((char, index) => (
+            <motion.h1
+              key={index}
+              variants={item}
+              data-scroll
+              data-scroll-delay={(0.13 - index * 0.01).toFixed(2)}
+              data-scroll-speed="4"
+              font-family="Dancing Script"
+            >
+              {char === " " ? "\u00A0" : char}
+            </motion.h1>
+          ))}
+        </div>
         <motion.h2
-          style={{ alignSelf: "flex-end" }}
           variants={item}
           data-scroll
           data-scroll-delay="0.04"
           data-scroll-speed="2"
           font-family="Dancing Script"
         >
-          We're getting married  
-          
-          
+          We're getting married
         </motion.h2>
       </Title>
 

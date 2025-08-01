@@ -9,33 +9,46 @@ const Section = styled.section`
   min-height: 130vh;
   width: 80vw;
   margin: 0 auto 6rem auto;
-
   position: relative;
-
   display: flex;
-  @media (max-width: 48em) {
-    width: 90vw;
-    min-height: 150vh;
-    margin-bottom: 8rem;
-  }
+  gap: 2rem;
 
-  @media (max-width: 30em) {
-    width: 100vw;
-    min-height: 170vh;
-    margin-bottom: 10rem;
+  @media (max-width: 64em) {
+    width: 95vw;
+    min-height: 140vh;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
   }
-  /* justify-content: center;
-  align-items: center; */
+  @media (max-width: 48em) {
+    width: 100vw;
+    min-height: 120vh;
+    margin-bottom: 6rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+  @media (max-width: 30em) {
+    min-height: 100vh;
+    margin-bottom: 4rem;
+    gap: 0.5rem;
+  }
 `;
 
 const Left = styled.div`
   width: 50%;
   font-size: ${(props) => props.theme.fontlg};
-  font-family:  Lora;
+  font-family: Lora, serif;
   font-weight: 300;
   position: relative;
   z-index: 5;
-  margin-top: 20%;
+  margin-top: 10%;
+  background: rgba(255,255,255,0.7);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  word-break: break-word;
 
   strong {
     font-weight: 800;
@@ -43,77 +56,77 @@ const Left = styled.div`
   }
 
   @media (max-width: 64em) {
-    width: 80%;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) !important;
-    margin: 0 auto;
-
-    padding: 2rem;
-    font-weight: 600;
-
-    backdrop-filter: blur(2px);
-    background-color: ${(props) => `rgba(${props.theme.textRgba},0.4)`};
-    border-radius: 20px;
-  }
-  @media (max-width: 48em) {
+    width: 90%;
+    margin-top: 2rem;
+    padding: 1.5rem 1rem;
     font-size: ${(props) => props.theme.fontmd};
   }
-  @media (max-width: 30em) {
+  @media (max-width: 48em) {
+    width: 98%;
+    margin-top: 1rem;
+    padding: 1rem 0.5rem;
     font-size: ${(props) => props.theme.fontsm};
-    padding: 2rem;
-    width: 70%;
+    background: rgba(255,255,255,0.9);
+  }
+  @media (max-width: 30em) {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.2rem;
+    font-size: 1rem;
+    border-radius: 8px;
   }
 `;
 
 const Right = styled.div`
   width: 50%;
   position: relative;
-  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 
   img {
     width: 100%;
     height: auto;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 1rem;
   }
 
-  .small-img-1 {
-    width: 40%;
-    position: absolute;
-    right: 95%;
-    bottom: 10%;
+  .small-img-1, .small-img-2 {
+    width: 60%;
+    max-width: 220px;
+    position: static;
+    margin: 0.5rem 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
-  .small-img-2 {
-    width: 40%;
-    position: absolute;
-    left: 80%;
-    top: 30%;
-  }
+
   @media (max-width: 64em) {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     img {
-      width: 100%;
-      height: 100vh;
-      object-fit: cover;
+      max-width: 320px;
     }
-
-    .small-img-1 {
-      width: 30%;
-      height: auto;
-      left: 5%;
-      bottom: 10%;
+    .small-img-1, .small-img-2 {
+      max-width: 160px;
     }
-    .small-img-2 {
-      width: 30%;
-      height: auto;
-
-      position: absolute;
-      left: 60%;
-      bottom: 20%;
+  }
+  @media (max-width: 48em) {
+    img {
+      max-width: 220px;
+    }
+    .small-img-1, .small-img-2 {
+      max-width: 120px;
+    }
+  }
+  @media (max-width: 30em) {
+    img {
+      max-width: 140px;
+    }
+    .small-img-1, .small-img-2 {
+      max-width: 80px;
     }
   }
 `;
@@ -122,22 +135,36 @@ const Title = styled.h1`
   font-size: ${(props) => props.theme.fontxxl};
   font-family: "Dancing Script";
   font-weight: 300;
-  /* text-transform: capitalize; */
-
   position: absolute;
-  
   top: 1rem;
+  left: 0;
   span {
     display: inline-block;
   }
 
   @media (max-width: 64em) {
     font-size: ${(props) => props.theme.fontxl};
-    top: 0;
-    left: 0%;
+    position: static;
+    margin-bottom: 1rem;
+    text-align: center;
+    top: unset;
+    left: unset;
   }
   @media (max-width: 48em) {
     font-size: ${(props) => props.theme.fontlg};
+    position: static;
+    margin-bottom: 1rem;
+    text-align: center;
+    top: unset;
+    left: unset;
+  }
+  @media (max-width: 30em) {
+    font-size: ${(props) => props.theme.fontmd};
+    position: static;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    top: unset;
+    left: unset;
   }
 `;
 
