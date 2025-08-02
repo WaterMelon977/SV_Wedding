@@ -13,6 +13,7 @@ import Home from "./sections/Home";
 import Marquee from "./sections/Marquee";
 import NewArrival from "./sections/NewArrival";
 import Shop from "./sections/Shop";
+import VenueDetails from "./sections/VenueDetails";
 import GlobalStyles from "./styles/GlobalStyles";
 import { dark } from "./styles/Themes";
 
@@ -62,6 +63,7 @@ function App() {
               <Shop key="Shop" />
               <Marquee key="marquee" />
               <NewArrival key="new arrival" />
+              <VenueDetails key="venue" />
               <Footer key="Footer" />
             </AnimatePresence>
           </main>
