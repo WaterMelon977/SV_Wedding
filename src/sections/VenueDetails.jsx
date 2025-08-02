@@ -129,20 +129,6 @@ const MapContainer = styled.div`
   height: 100%;
   position: relative;
 
-  &::before {
-    content: 'Railway Officers Club';
-    position: absolute;
-    top: 46%;
-    left: 52%;
-    background-color: lightgrey;
-    color: ${props => props.theme.body};
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    font-family: 'Dancing Script';
-    font-size: ${props => props.theme.fontmd};
-    z-index: 1;
-  }
-
   iframe {
     width: 100%;
     height: 100%;
@@ -166,13 +152,15 @@ const VenueDetails = () => {
       
       <Left>
         <MapContainer>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.412584559251!2d80.64265827588747!3d16.523274427838773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35f02d38a11715%3A0xa374ee6442706182!2sGJ5P%2BM4%20Vijayawada%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1706963839811!5m2!1sen!2sin"
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d568.6397166050294!2d80.63583431709127!3d16.509086158338256!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35faaa4d63c89d%3A0x5dcdd6b5cb6563ec!2sVijayawada%20Railway%20Club%20Function%20Hall!5e0!3m2!1sen!2sin!4v1754165591545!5m2!1sen!2sin"
+            title="Vijayawada Railway Club Function Hall"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Railway Officers Club, Vijayawada, Andhra Pradesh"
-            style={{ filter: 'grayscale(0.2)' }}
           />
         </MapContainer>
       </Left>
