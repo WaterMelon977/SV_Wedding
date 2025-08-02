@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
 import styled from "styled-components";
+import useSound from 'use-sound';
+import cheeringSound from '../assets/sounds/Drum.mp3';
 
 import img1 from "../assets/Images/1.webp";
 import img2 from "../assets/Images/2.webp";
@@ -135,24 +137,31 @@ const Item = styled(motion.div)`
   }
 `;
 //data-scroll data-scroll-speed="-2" data-scroll-direction="horizontal"
-const Product = ({ img }) => {
+const Product = ({ img, playCheer, stopCheer }) => {
   const title = "Click to bless the couple";
   const imgRef = React.useRef(null);
 
   const handleConfetti = async (e) => {
     const canvasConfetti = (await import('canvas-confetti')).default;
     const rect = imgRef.current.getBoundingClientRect();
+    
     // Calculate the center of the image relative to the viewport
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
+
+    // Stop any playing sound and restart it
+    stopCheer();
+    playCheer();
+
     // Fire confetti at the image center
     canvasConfetti({
-      particleCount: 80,
+      particleCount: 100,
       spread: 70,
       origin: {
         x: x / window.innerWidth,
         y: y / window.innerHeight,
       },
+      colors: ['#FFD700', '#FFA500', '#FF69B4', '#FF1493' , '#FF4500', '#47ff66ff', '#ff0000ff'],
       zIndex: 9999,
     });
   };
@@ -167,7 +176,34 @@ const Product = ({ img }) => {
       style={{ cursor: 'pointer' }}
     >
       <img ref={imgRef} width="400" height="600" src={img} alt={title} />
-      <h1 style={{fontFamily: "Dancing Script"}}>{title}</h1>
+      <motion.h1 
+        style={{
+          fontFamily: "Dancing Script",
+          display: "block",
+          width: "100%",
+          textAlign: "center",
+          marginTop: "1rem",
+          position: "absolute",
+          bottom: "-2.5rem",
+          // left: "50%",
+          transform: "translateX(-50%)"
+        }}
+        animate={{
+          scale: [1, 1.1, 1],
+          textShadow: [
+            "0 0 2px rgba(255,255,255,0.5)",
+            "0 0 8px rgba(255,215,0,0.8)",
+            "0 0 2px rgba(255,255,255,0.5)"
+          ]
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      >
+        {title}
+      </motion.h1>
     </Item>
   );
 };
@@ -175,8 +211,12 @@ const Product = ({ img }) => {
 const Shop = () => {
   gsap.registerPlugin(ScrollTrigger);
   const ref = useRef(null);
-
   const Horizontalref = useRef(null);
+
+  const [playCheer, { stop: stopCheer }] = useSound(cheeringSound, { 
+    volume: 0.5,
+    interrupt: true, // This allows the sound to be interrupted
+  });
 
   useLayoutEffect(() => {
     let element = ref.current;
@@ -244,12 +284,11 @@ const Shop = () => {
         </p>
       </Left>
       <Right data-scroll ref={Horizontalref}>
-        <Product img={silo}  />
-        <Product img={ring}  />
-        <Product img={hero} />
-        <Product img={bride}  />
-        <Product img={groom} />
-        
+        <Product img={silo} playCheer={playCheer} stopCheer={stopCheer} />
+        <Product img={ring} playCheer={playCheer} stopCheer={stopCheer} />
+        <Product img={hero} playCheer={playCheer} stopCheer={stopCheer} />
+        <Product img={bride} playCheer={playCheer} stopCheer={stopCheer} />
+        <Product img={groom} playCheer={playCheer} stopCheer={stopCheer} />
       </Right>
     </Section>
   );

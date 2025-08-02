@@ -34,11 +34,11 @@ const Container = styled.div`
 
 const Banner = styled.h1`
   font-size: ${(props) => props.theme.fontxxxl};
-  font-family: 'Kaushan Script';
+  font-family: 'Dancing Script';
   color: ${(props) => props.theme.text};
   /* position: absolute; */
   white-space: nowrap;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   line-height: 1;
 
   @media (max-width: 70em){

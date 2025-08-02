@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const Container = styled(motion.div)`
@@ -26,12 +26,18 @@ overflow: hidden;
 
   @media (max-width: 48em) {
     svg{
-      width: 20vw;
+      width: 80vw;
+    }
+  }
+
+  @media (max-width: 30em) {
+    svg{
+      width: 90vw;
     }
   }
 
   svg {
-    width: 10vw;
+    width: 50vw;
 
     height: auto;
     overflow: visible;
@@ -47,17 +53,53 @@ overflow: hidden;
 
 
 const Text = styled(motion.span)`
-  font-size: ${(props) => props.theme.fontxl};
+  font-size: ${(props) => props.theme.fontxxl};
   color: ${(props) => props.theme.text};
-  padding-top: 0.5rem;
+  padding-top: 1rem;
 
   @media (max-width: 48em) {
-    font-size: ${(props) => props.theme.fontlg};
+    font-size: ${(props) => props.theme.fontxl};
+    padding-top: 1.5rem;
+  }
 
+  @media (max-width: 30em) {
+    font-size: ${(props) => props.theme.fontlg};
+    padding-top: 2rem;
   }
 `;
 
 const Loader = () => {
+  useEffect(() => {
+    // Delay for initial animations to complete
+    const timer = setTimeout(async () => {
+      const canvasConfetti = (await import('canvas-confetti')).default;
+      
+      // Fire confetti from left side
+      canvasConfetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { x: 0.2, y: 0.5 },
+        colors: ['#FFD700', '#FFA500', '#FF69B4', '#FF1493', '#e63946'],
+        ticks: 200,
+        gravity: 0.8,
+        decay: 0.94,
+      });
+      
+      // Fire confetti from right side
+      canvasConfetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { x: 0.8, y: 0.5 },
+        colors: ['#FFD700', '#FFA500', '#FF69B4', '#FF1493', '#e63946'],
+        ticks: 200,
+        gravity: 0.8,
+        decay: 0.94,
+      });
+    }, 3000); // Delay of 3 seconds to allow animations to complete
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Container
       initial={{ y: 0, opacity: 1 }}
@@ -74,10 +116,10 @@ const Loader = () => {
 >
   {/* S letter */}
   <motion.text
-    x="-250"
+    x="-200"
     y="220"
     fontFamily="'Dancing Script', 'Brush Script MT', cursive"
-    fontSize="120"
+    fontSize="100"
     fill="#fff"
     initial={{ opacity: 0, x: -30 }}
     animate={{ opacity: 1, x: 0 }}
@@ -95,18 +137,32 @@ const Loader = () => {
        C180 100, 300 100, 300 180Z"
     fill="#e63946"
     stroke="#fff"
-    strokeWidth="10"
+    strokeWidth="8"
     initial={{ scale: 0, opacity: 0 }}
-    animate={{ scale: [0, 1.2, 1], opacity: 1 }}
-    transition={{ duration: 1.2, delay: 1, type: 'spring', stiffness: 180 }}
+    animate={{ 
+      scale: [0, 1.3, 1, 1.1, 1],
+      opacity: 1 
+    }}
+    transition={{ 
+      duration: 2,
+      delay: 1,
+      repeat: Infinity,
+      repeatType: "reverse",
+      ease: "easeInOut"
+    }}
+    style={{
+      transform: "scale(1.2)",
+      transformOrigin: "center",
+      filter: "drop-shadow(0 0 10px rgba(230,57,70,0.5))"
+    }}
   />
 
   {/* V letter */}
   <motion.text
-    x="480"
+    x="500"
     y="220"
     fontFamily="'Dancing Script', 'Brush Script MT', cursive"
-    fontSize="120"
+    fontSize="100"
     fill="#fff"
     initial={{ opacity: 0, x: 30 }}
     animate={{ opacity: 1, x: 0 }}

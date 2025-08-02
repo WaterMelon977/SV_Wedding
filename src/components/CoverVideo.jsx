@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import MainVideo from "../assets/reel2.mp4";
+import mobileVideo from "../assets/reel-mobile.mp4";
 
 const VideoContainer = styled.section`
   width: 100%;
@@ -105,6 +106,27 @@ const item = {
 };
 
 const CoverVideo = () => {
+  const [videoSrc, setVideoSrc] = useState(MainVideo);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) { // 48em = 768px
+        setVideoSrc(mobileVideo);
+      } else {
+        setVideoSrc(MainVideo);
+      }
+    };
+
+    // Set initial video source
+    handleResize();
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <VideoContainer data-scroll>
       <DarkOverlay />
@@ -116,9 +138,47 @@ const CoverVideo = () => {
               key={index}
               variants={item}
               data-scroll
-              data-scroll-delay={(0.13 - index * 0.01).toFixed(2)}
-              data-scroll-speed="4"
+              data-scroll-delay="0"
+              data-scroll-speed="2"
+              animate={{
+                opacity: 1,
+                y: [0, -15, 0],
+                scale: [1, 1.05, 1],
+                rotateX: 0,
+                transition: {
+                  duration: 2,
+                  delay: index * 0.1,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut"
+                }
+              }}
+              initial={{ 
+                opacity: 0,
+                y: 50,
+                scale: 0.5,
+                rotateX: 45
+              }}
+              whileHover={{
+                scale: 1.1,
+                y: -10,
+                textShadow: "0 0 8px rgb(255,255,255)",
+                transition: {
+                  duration: 0.2,
+                  ease: "easeInOut"
+                }
+              }}
+              whileInView={{
+                opacity: 1,
+                transition: {
+                  duration: 0.3
+                }
+              }}
               font-family="Dancing Script"
+              style={{
+                textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                display: 'inline-block'
+              }}
             >
               {char === " " ? "\u00A0" : char}
             </motion.h1>
@@ -127,15 +187,39 @@ const CoverVideo = () => {
         <motion.h2
           variants={item}
           data-scroll
-          data-scroll-delay="0.04"
-          data-scroll-speed="2"
+          data-scroll-delay="0"
+          data-scroll-speed="1"
+          whileInView={{ 
+            opacity: 1,
+            y: 0,
+            scale: 1
+          }}
+          initial={{ 
+            opacity: 0,
+            y: 30,
+            scale: 0.8
+          }}
+          transition={{
+            duration: 0.5,
+            delay: 1.5
+          }}
           font-family="Dancing Script"
+          style={{
+            textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+          }}
         >
           We're getting married
         </motion.h2>
       </Title>
 
-      <video src={MainVideo} type="video/mp4" autoPlay muted loop />
+      <video 
+        src={videoSrc} 
+        type="video/mp4" 
+        autoPlay 
+        muted 
+        loop
+        playsInline 
+      />
     </VideoContainer>
   );
 };
