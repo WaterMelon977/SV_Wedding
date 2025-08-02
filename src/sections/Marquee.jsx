@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import img_web from "../assets/Images/temple2.JPG";
-import img_mobile from "../assets/Images/g11.JPG";
+import img_mobile from "../assets/Images/g8.JPG";
 
 const Section = styled.section`
   min-height: 100vh;

@@ -16,6 +16,15 @@ import img9 from '../assets/Images/g9.JPG';
 import img10 from '../assets/Images/g10.JPG';
 import img11 from '../assets/Images/g11.JPG';
 import img12 from '../assets/Images/g12.JPG';
+import img13 from '../assets/Images/pw1.JPG';
+import img14 from '../assets/Images/pw2.JPG';
+import img15 from '../assets/Images/pw4.JPG';
+import img16 from '../assets/Images/pw5.JPG';
+import img17 from '../assets/Images/pw6.JPG';
+import img18 from '../assets/Images/pw7.JPG';
+import img19 from '../assets/Images/pw8.JPG';
+
+
 
 const Section = styled.section`
   min-height: 100vh;
@@ -175,12 +184,12 @@ const NewArrival = () => {
 let t1= gsap.timeline();
     setTimeout(() => {
       let mainHeight = scrollingElement.scrollHeight;
-      element.style.height = `calc(${mainHeight / 11}px)`;
+      element.style.height = `calc(${mainHeight / 20}px)`;
       t1.to(element, {
         scrollTrigger: {
           trigger: element,
           start: 'top top',
-          end: 'bottom+=100% top-=200%',
+          end: 'bottom+=100% top-=600%',
           scroller: '.App', //locomotive-scroll
           scrub: 1,
           pin: true,
@@ -241,6 +250,14 @@ let t1= gsap.timeline();
         <Photos img={img6} name="Sweaters" />
         <Photos img={img7} name="Pants" />
         <Photos img={img8} name="Shorts" />
+        <Photos img={img13} name="Party Wear 1" />
+        <Photos img={img14} name="Party Wear 2" />
+        <Photos img={img15} name="Party Wear 3" />
+        <Photos img={img16} name="Party Wear 4" />
+        <Photos img={img17} name="Party Wear 5" />
+        <Photos img={img18} name="Party Wear 6" />
+        <Photos img={img19} name="Party Wear 7" />
+
         
       </Container>
 
