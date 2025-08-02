@@ -126,7 +126,7 @@ const Text = styled.div`
   font-weight: 300;
   position: absolute;
   padding: 2rem;
-  top: 0;
+  top: 20%;
   right: 0;
   z-index: 11;
 
