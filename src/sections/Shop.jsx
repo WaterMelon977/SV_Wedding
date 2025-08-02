@@ -6,16 +6,7 @@ import styled from "styled-components";
 import useSound from 'use-sound';
 import cheeringSound from '../assets/sounds/Drum.mp3';
 
-import img1 from "../assets/Images/1.webp";
-import img2 from "../assets/Images/2.webp";
-import img3 from "../assets/Images/3.webp";
-import img4 from "../assets/Images/4.webp";
-import img5 from "../assets/Images/5.webp";
-import img6 from "../assets/Images/6.webp";
-import img7 from "../assets/Images/7.webp";
-import img8 from "../assets/Images/8.webp";
-import img9 from "../assets/Images/9.webp";
-import img10 from "../assets/Images/10.webp";
+
 import silo from "../assets/Images/silo.jpg";
 import ring from "../assets/Images/ring.jpg";
 import hero from "../assets/Images/heropic.jpg";

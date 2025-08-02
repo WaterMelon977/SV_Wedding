@@ -1,58 +1,76 @@
 import React from "react";
 import styled from "styled-components";
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
 import img1 from "../assets/Images/couple.jpg";
-import img2 from "../assets/Images/slide1_bride.jpg";
-import img3 from "../assets/Images/slide2_groom.jpg";
+import img2 from "../assets/Images/garland.jpg";
+
 
 const Section = styled.section`
-  min-height: 130vh;
-  width: 80vw;
-  margin: 0 auto 6rem auto;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0 auto;
   position: relative;
+  overflow: hidden;
+  background-color: ${props => props.theme.body};
+  isolation: isolate;
   display: flex;
-  gap: 2rem;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+`;
 
-  @media (max-width: 64em) {
-    width: 95vw;
-    min-height: 140vh;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+const BackgroundImages = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transform-origin: center top;
+
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    will-change: transform;
   }
+
+  .desktop-img {
+    display: block;
+  }
+  .mobile-img {
+    display: none;
+  }
+
   @media (max-width: 48em) {
-    width: 100vw;
-    min-height: 120vh;
-    margin-bottom: 6rem;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 0 0.5rem;
-  }
-  @media (max-width: 30em) {
-    min-height: 100vh;
-    margin-bottom: 4rem;
-    gap: 0.5rem;
+    .desktop-img {
+      display: none;
+    }
+    .mobile-img {
+      display: block;
+    }
   }
 `;
 
 const Left = styled.div`
-  width: 50%;
+  width: 60%;
+  max-width: 800px;
   font-size: ${(props) => props.theme.fontlg};
-  // font-family: Lora, serif;
   font-weight: 300;
-  position: sticky;
-  top: 6rem;
-  // z-index: 5;
-  margin-top: 10%;
-  background: rgba(255,255,255,0.7);
+  position: relative;
+  top: 15%;
+  z-index: 2;
+  margin: -100 auto;
+  background: rgba(255, 255, 255, 0.23);
+  backdrop-filter: blur(10px);
   border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 3rem 2rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
   word-break: break-word;
-  margin-top: 10%;
-  padding: 2rem;
 
   strong {
     font-weight: 800;
@@ -60,186 +78,103 @@ const Left = styled.div`
   }
 
   @media (max-width: 64em) {
+    width: 80%;
+    padding: 2rem 1rem;
+    font-size: ${(props) => props.theme.fontmd};
+  }
+  
+  @media (max-width: 48em) {
     width: 90%;
-    margin-top: 2rem;
-    padding: 1.5rem 1rem;
-    font-size: ${(props) => props.theme.fontmd};
-    position: static;
-    top: unset;
-  }
-  @media (max-width: 48em) {
-    width: 98%;
-    margin-top: 1rem;
-    padding: 1rem 0.5rem;
+    padding: 1.5rem 0.5rem;
     font-size: ${(props) => props.theme.fontsm};
-    background: rgba(255,255,255,0.9);
-    position: static;
-    top: unset;
   }
+  
   @media (max-width: 30em) {
-    width: 100%;
-    margin-top: 0.5rem;
-    padding: 0.5rem 0.2rem;
+    width: 95%;
+    padding: 1rem 0.2rem;
     font-size: 1rem;
-    border-radius: 8px;
-    position: static;
-    top: unset;
-  }
-`;
-
-const Right = styled.div`
-  width: 50%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-
-  img {
-    width: 100%;
-    height: auto;
-    max-width: 400px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    margin-bottom: 1rem;
-  }
-
-  .small-img-1, .small-img-2 {
-    width: 60%;
-    max-width: 220px;
-    position: static;
-    margin: 0.5rem 0;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-
-  @media (max-width: 64em) {
-    width: 100%;
-    img {
-      max-width: 320px;
-    }
-    .small-img-1, .small-img-2 {
-      max-width: 160px;
-    }
-  }
-  @media (max-width: 48em) {
-    img {
-      max-width: 220px;
-    }
-    .small-img-1, .small-img-2 {
-      max-width: 120px;
-    }
-  }
-  @media (max-width: 30em) {
-    img {
-      max-width: 140px;
-    }
-    .small-img-1, .small-img-2 {
-      max-width: 80px;
-    }
-  }
-`;
-
-const Title = styled.h1`
-  font-size: ${(props) => props.theme.fontxxl};
-  font-family: "Dancing Script";
-  font-weight: 300;
-  position: absolute;
-  top: 1rem;
-  left: 0;
-  span {
-    display: inline-block;
-  }
-
-  @media (max-width: 64em) {
-    font-size: ${(props) => props.theme.fontxl};
-    position: static;
-    margin-bottom: 1rem;
-    text-align: center;
-    top: unset;
-    left: unset;
-  }
-  @media (max-width: 48em) {
-    font-size: ${(props) => props.theme.fontlg};
-    position: static;
-    margin-bottom: 1rem;
-    text-align: center;
-    top: unset;
-    left: unset;
-  }
-  @media (max-width: 30em) {
-    font-size: ${(props) => props.theme.fontmd};
-    position: static;
-    margin-bottom: 0.5rem;
-    text-align: center;
-    top: unset;
-    left: unset;
   }
 `;
 
 const About = () => {
-  return (
-    <Section id="fixed-target" className="about">
-      <Title
-        data-scroll
-        data-scroll-speed="-2"
-        data-scroll-direction="horizontal"
-      >
-        We whole heartedly invite <br/>
-        you for the celebration of <br/>
-        love & togetherness
-      </Title>
-      
+  const sectionRef = React.useRef(null);
+  const backgroundRef = React.useRef(null);
+  const contentRef = React.useRef(null);
 
-      <Left data-scroll data-scroll-sticky data-scroll-target="#fixed-target">
+  React.useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const section = sectionRef.current;
+    
+    const mediaQuery = window.matchMedia('(max-width: 48em)');
+    const imageSelector = mediaQuery.matches ? '.mobile-img' : '.desktop-img';
+    const image = backgroundRef.current.querySelector(imageSelector);
+
+    // Pin the content
+    const pinTl = ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        pin: contentRef.current,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+    });
+
+    // Background Image zoom
+    const zoomTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true,
+        }
+    });
+
+    if (image) {
+      zoomTl.fromTo(image, { scale: 1 }, { scale: 1.2, ease: "none" });
+    }
+
+
+    return () => {
+      pinTl.kill();
+      zoomTl.kill();
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    };
+  }, []);
+
+  return (
+    <Section ref={sectionRef} id="fixed-target" className="about">
+      <BackgroundImages ref={backgroundRef}>
+        <img src={img2} alt="Desktop Background" className="background-image desktop-img" />
+        <img src={img1} alt="Mobile Background" className="background-image mobile-img" />
+      </BackgroundImages>
+
+      <Left ref={contentRef} className="about-content">
+        <h3 style={{ margin: '2rem 0', textAlign: 'center', fontFamily: 'Dancing Script' }}>We whole heartedly invite you for the celebration of love & togetherness</h3>
+
         We've looked at thousands of scans… but never has anything felt more certain than this: we found the one in each other.
 
-With hearts full of love (and just a hint of nerves!),
-We, Sandhya & Vishal, two radiologists by profession and soulmates by fate, are overjoyed to invite you to celebrate the beginning of our forever.
-<br />
+        With hearts full of love (and just a hint of nerves!),
+        We, Sandhya & Vishal, two radiologists by profession and soulmates by fate, are overjoyed to invite you to celebrate the beginning of our forever.
         <br />
-📅 Date: <strong>August 10, 2025</strong>
-<br/>
-📍 Location: <strong>Railway Officers club, kasturibaipet, Vijayawada</strong>
-
-<br />
         <br />
-This isn't just a date on the calendar — it's a day that will forever be etched in our hearts, and it would mean the world to have you there beside us.
+        📅 Date: <strong>August 10, 2025</strong>
+        <br/>
+        📍 Location: <strong>Railway Officers club, kasturibaipet, Vijayawada</strong>
 
-Come witness our vows, dance with us, laugh with us, cry happy tears (we probably will too!), and help us write the most beautiful chapter in our story yet.
-<br />
         <br />
+        <br />
+        This isn't just a date on the calendar — it's a day that will forever be etched in our hearts, and it would mean the world to have you there beside us.
 
-With love and anticipation,
-<strong>Sandhya & Vishal</strong>
-<br />
+        Come witness our vows, dance with us, laugh with us, cry happy tears (we probably will too!), and help us write the most beautiful chapter in our story yet.
+        <br />
         <br />
 
-
+        With love and anticipation,
+        <strong>Sandhya & Vishal</strong>
+        <br />
+        <br />
       </Left>
-
-      <Right>
-        <img width="400" height="800" src={img1} alt="About Us" />
-        <img
-          width="400"
-          height="800"
-          // className="small-img-1"
-          src={img2}
-          alt="About Us"
-          data-scroll
-          data-scroll-speed="5"
-        />
-        <img
-          width="400"
-          height="800"
-          // className="small-img-2"
-          src={img3}
-          alt="About Us"
-          data-scroll
-          data-scroll-speed="-2"
-        />
-      </Right>
     </Section>
   );
 };

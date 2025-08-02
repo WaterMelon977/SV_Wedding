@@ -1,26 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
+import img_web from "../assets/Images/temple2.JPG";
+import img_mobile from "../assets/Images/g11.JPG";
 
 const Section = styled.section`
   min-height: 100vh;
-  width: 80vw;
+  width: 100%;
   margin: 0 auto;
-
+  
   display: flex;
   justify-content: center;
   align-items: center;
 
-  /* background-color: blue; */
   position: relative;
+  
+  background-image: url(${img_web});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-@media (max-width: 48em){
-  width: 90vw;
-} 
-
+  @media (max-width: 48em){
+    background-image: url(${img_mobile});
+  } 
 `;
 
 const Container = styled.div`
   min-height: 100vh;
+  width: 80vw;
+  margin: 0 auto;
 
   display: flex;
   flex-direction: column;
@@ -29,7 +36,10 @@ const Container = styled.div`
 
   @media (max-width: 64em){
     justify-content: center;
-}
+  }
+  @media (max-width: 48em){
+    width: 90vw;
+  }
 `;
 
 const Banner = styled.h1`
