@@ -23,6 +23,7 @@ const Section = styled.section`
   width: 100%;
   margin: 0 auto;
   /* height: 300vh; */
+  background-color: ${(props) => props.theme.body};
 
   display: flex;
   justify-content: center;
@@ -57,14 +58,10 @@ const Overlay = styled.div`
     height: 80vh;
   }
   @media (max-width: 48em) {
-  width: 60vw;
-
-    height: 80vh;
-  }
-  @media (max-width: 30em) {
-  width: 80vw;
-
-    height: 60vh;
+    width: 100vw;
+    height: 100vh;
+    box-shadow: none;
+    border: none;
   }
 `;
 
@@ -88,13 +85,14 @@ const Container = styled.div`
 
   }
   @media (max-width: 48em) {
-  width: 40vw;
+  width: 80vw;
 
   }
   @media (max-width: 30em) {
-  width: 60vw;
+  width: 90vw;
 
   }
+  
 `;
 
 const Title = styled(motion.h1)`
@@ -122,6 +120,7 @@ const Title = styled(motion.h1)`
 `;
 const Text = styled.div`
   width: 20%;
+  color: ${(props) => props.theme.text};
   font-size: ${(props) => props.theme.fontlg};
   font-weight: 300;
   position: absolute;
@@ -156,7 +155,7 @@ const Item = styled.div`
 const Photos = ({ img }) => {
   return (
     <Item>
-      <img width="400" height="600" src={img} alt="gallery_pics" />
+      <img src={img} style={{ objectFit: 'cover' }} alt="gallery_pics" />
       {/* <h2>{name}</h2> */}
     </Item>
   );
@@ -176,12 +175,12 @@ const NewArrival = () => {
 let t1= gsap.timeline();
     setTimeout(() => {
       let mainHeight = scrollingElement.scrollHeight;
-      element.style.height = `calc(${mainHeight / 10}px)`;
+      element.style.height = `calc(${mainHeight / 11}px)`;
       t1.to(element, {
         scrollTrigger: {
           trigger: element,
           start: 'top top',
-          end: 'bottom+=100% top-=100%',
+          end: 'bottom+=100% top-=200%',
           scroller: '.App', //locomotive-scroll
           scrub: 1,
           pin: true,
