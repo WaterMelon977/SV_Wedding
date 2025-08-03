@@ -137,6 +137,7 @@ const Text = styled.div`
   top: 20%;
   right: 0;
   z-index: 11;
+  font-family: 'Open Sans', sans-serif;
 
   @media (max-width: 48em) {
     display: none;
