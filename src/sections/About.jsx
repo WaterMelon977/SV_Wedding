@@ -71,6 +71,7 @@ const Left = styled.div`
   padding: 3rem 2rem;
   box-shadow: 0 8px 32px rgba(0,0,0,0.1);
   word-break: break-word;
+  font-family: 'Open Sans', sans-serif;
 
   strong {
     font-weight: 800;

@@ -67,6 +67,7 @@ const Left = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Open Sans', sans-serif;
 
   p {
     font-size: ${(props) => props.theme.fontlg};
