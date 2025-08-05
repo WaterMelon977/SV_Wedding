@@ -14,6 +14,7 @@ import Marquee from "./sections/Marquee";
 import NewArrival from "./sections/NewArrival";
 import Shop from "./sections/Shop";
 import VenueDetails from "./sections/VenueDetails";
+import VenueMap from "./sections/VenueMap";
 import GlobalStyles from "./styles/GlobalStyles";
 import { dark } from "./styles/Themes";
 
@@ -62,6 +63,7 @@ function App() {
               <Marquee key="marquee" />
               <VenueDetails key="venue" />
               <About key="about" />
+              <VenueMap key="venue-map" />
               <Shop key="Shop" />
               <NewArrival key="new arrival" />
               
