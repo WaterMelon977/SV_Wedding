@@ -169,7 +169,7 @@ const Photos = ({ img, onClick }) => {
   return (
     <Item onClick={onClick}>
       <img src={img} style={{ objectFit: 'cover' }} alt="gallery_pics" />
-      {/* <h2>{name}</h2> */}
+      <h2 style={{ color: 'white', textAlign: 'center' ,fontFamily: 'Dancing Script'}}>Click image for Gallery mode</h2>
     </Item>
   );
 };

@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import confetti from 'canvas-confetti';
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -46,6 +47,37 @@ const NavButton = styled.button`
 `;
 
 const GalleryOverlay = ({ images, selectedImage, setSelectedImage, onClose }) => {
+  const prevSelectedImageRef = useRef(selectedImage);
+
+  const triggerConfetti = useCallback(() => {
+    // Create confetti from left side
+    confetti({
+      particleCount: 50,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0, y: 0.5 },
+      colors: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff']
+    });
+
+    // Create confetti from right side
+    confetti({
+      particleCount: 50,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1, y: 0.5 },
+      colors: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff']
+    });
+  }, []);
+
+  // Detect navigation changes and trigger confetti
+  useEffect(() => {
+    if (prevSelectedImageRef.current !== selectedImage && selectedImage !== null) {
+      triggerConfetti();
+      console.log("confetti")
+      prevSelectedImageRef.current = selectedImage;
+    }
+  }, [selectedImage, triggerConfetti]);
+
   if (selectedImage === null) return null;
 
   const handleNext = () => {
