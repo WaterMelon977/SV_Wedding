@@ -59,10 +59,10 @@ function App() {
               {Loaded ? null : <Loader />}
 
               <Home key="home" />
+              <Marquee key="marquee" />
               <VenueDetails key="venue" />
               <About key="about" />
               <Shop key="Shop" />
-              <Marquee key="marquee" />
               <NewArrival key="new arrival" />
               
               <Footer key="Footer" />

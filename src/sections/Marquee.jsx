@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import img_web from "../assets/Images/temple2.JPG";
 import img_mobile from "../assets/Images/g8.JPG";
+import { useLocomotiveScroll } from 'react-locomotive-scroll';
+
+
 
 const Section = styled.section`
   min-height: 100vh;
@@ -77,18 +80,35 @@ const Banner = styled.h1`
 `;
 
 const Marquee = () => {
+  const [click, setClick] = useState(false);
+  const { scroll } = useLocomotiveScroll();
+
+  const handleScroll = (id) => {
+    let elem = document.querySelector(id);
+    // console.log(elem);
+    setClick(!click);
+    scroll.scrollTo(elem, {
+      offset: '-100',
+      duration: '2000',
+      easing: [0.25, 0.0, 0.35, 1.0],
+    });
+  };
+
   return (
     <Section>
       <Container id="direction">
         <Banner>
-          <span
-            data-scroll
-            data-scroll-direction="horizontal"
-            data-scroll-speed="8"
-            data-scroll-target="#direction"
-            fontFamily="Dancing Script"
-          >
-            From the moment you say "I do"
+        <span
+          data-scroll
+          data-scroll-direction="horizontal"
+          data-scroll-speed="8"
+          data-scroll-target="#direction"
+          style={{ cursor: 'pointer', fontFamily: 'Dancing Script' }}
+          whileHover={{ scale: 1.1, y: -5 }}
+          whileTap={{ scale: 0.9, y: 0 }}
+          onClick={() => handleScroll('#home')}
+        >
+            Video Glimpse
           </span>
         </Banner>
         <Banner data-scroll data-scroll-speed="-2" data-scroll-target="#direction">
@@ -97,8 +117,12 @@ const Marquee = () => {
             data-scroll-direction="horizontal"
             data-scroll-speed="-6"
             data-scroll-target="#direction"
+            style={{ cursor: 'pointer', fontFamily: 'Dancing Script' }}
+          whileHover={{ scale: 1.1, y: -5 }}
+          whileTap={{ scale: 0.9, y: 0 }}
+          onClick={() => handleScroll('#venue')}
           >
-            to the last dance of the night,
+            Events and Venue
           </span>
         </Banner>
         <Banner>
@@ -107,21 +131,29 @@ const Marquee = () => {
             data-scroll-direction="horizontal"
             data-scroll-speed="6"
             data-scroll-target="#direction"
+            style={{ cursor: 'pointer', fontFamily: 'Dancing Script' }}
+          whileHover={{ scale: 1.1, y: -5 }}
+          whileTap={{ scale: 0.9, y: 0 }}
+          onClick={() => handleScroll('#shop')}
           >
-            A journey in pictures
+            Jarabala's Invite
           </span>
         </Banner>
-        {/* <Banner>
+        <Banner>
           <span
             data-scroll
             data-scroll-direction="horizontal"
             data-scroll-speed="-4"
             data-scroll-target="#direction"
+            style={{ cursor: 'pointer', fontFamily: 'Dancing Script' }}
+          whileHover={{ scale: 1.1, y: -5 }}
+          whileTap={{ scale: 0.9, y: 0 }}
+          onClick={() => handleScroll('.new-arrival')}
           >
-            
+            Snapshots
           </span>
-        </Banner> */}
-        <Banner data-scroll data-scroll-speed="6" data-scroll-target="#direction">
+        </Banner>
+        {/* <Banner data-scroll data-scroll-speed="6" data-scroll-target="#direction">
           <span
             data-scroll
             data-scroll-direction="horizontal"
@@ -130,7 +162,7 @@ const Marquee = () => {
           >
             Capturing the love story
           </span>
-        </Banner>
+        </Banner> */}
       </Container>
     </Section>
   );
