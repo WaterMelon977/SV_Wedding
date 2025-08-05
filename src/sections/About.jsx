@@ -13,6 +13,7 @@ const Section = styled.section`
   margin: 0 auto;
   position: relative;
   overflow: hidden;
+  overflow-x: hidden;
   background-color: ${props => props.theme.body};
   isolation: isolate;
   display: flex;
@@ -72,6 +73,7 @@ const Left = styled.div`
   box-shadow: 0 8px 32px rgba(0,0,0,0.1);
   word-break: break-word;
   font-family: 'Open Sans', sans-serif;
+  overflow-x: hidden;
 
   strong {
     font-weight: 800;

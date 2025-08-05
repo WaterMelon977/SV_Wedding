@@ -279,8 +279,8 @@ const Shop = () => {
         <Product img={silo} playCheer={playCheer} stopCheer={stopCheer} />
         <Product img={ring} playCheer={playCheer} stopCheer={stopCheer} />
         <Product img={hero} playCheer={playCheer} stopCheer={stopCheer} />
-        <Product img={bride} playCheer={playCheer} stopCheer={stopCheer} />
-        <Product img={groom} playCheer={playCheer} stopCheer={stopCheer} />
+        {/* <Product img={bride} playCheer={playCheer} stopCheer={stopCheer} />
+        <Product img={groom} playCheer={playCheer} stopCheer={stopCheer} /> */}
       </Right>
     </Section>
   );

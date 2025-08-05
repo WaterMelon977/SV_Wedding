@@ -5,17 +5,17 @@ import silo from "../assets/Images/silo.jpg";
 
 const Section = styled.section`
   width: 100%;
-  
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   background-color: ${props => props.theme.text};
-  padding: 1rem;
+  // padding: 1rem;
   
   @media (max-width: 48em) {
-    padding: 0.5rem;
+    padding: 0.25rem;
+    // min-height: 60vh;
   }
 `;
 
@@ -28,20 +28,21 @@ const Title = styled(motion.h1)`
   text-align: center;
   position: absolute;
   top: 3rem;
-  left: 40%;
+  left: 50%;
   transform: translateX(-50%);
   z-index: 2;
 
   @media (max-width: 64em) {
-    font-size: 3rem;
-    top: 2.5rem;
+    font-size: 2.8rem;
+    top: 2rem;
     font-weight: 800;
   }
 
   @media (max-width: 48em) {
-    font-size: 2.5rem;
-    top: 2rem;
+    font-size: 2.2rem;
+    top: 1.5rem;
     font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
 `;
 
@@ -58,7 +59,7 @@ const EventContainer = styled.div`
   background-image: url(${silo});
   background-size: cover;
   background-position: center 20%;
-  border-radius: 15px;
+  // border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   display: flex;
@@ -104,9 +105,10 @@ const EventContainer = styled.div`
   @media (max-width: 64em) {
     width: 95%;
     padding: 1.5rem;
+    min-height: 35vh;
     
     .event-item {
-      padding: 0.8rem;
+      // padding: 0.8rem;
       
       h3 {
         font-size: ${props => props.theme.fontlg};
@@ -120,20 +122,26 @@ const EventContainer = styled.div`
   }
 
   @media (max-width: 48em) {
-    width: 98%;
-    padding: 1rem;
+    width: 100%;
+    padding: 1.2rem;
+    min-height: 50vh;
+    border-radius: 10px;
+    margin: 0 0.5rem;
     
     .event-item {
-      padding: 0.6rem;
+      // padding: 1rem;
+      margin-bottom: 0.5rem;
       
       h3 {
-        font-size: ${props => props.theme.fontmd};
-        margin-bottom: 0.6rem;
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+        font-weight: 600;
       }
       p {
-        font-size: ${props => props.theme.fontsm};
-        line-height: 1.4;
-        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 0.6rem;
+        font-weight: 400;
       }
     }
   }
