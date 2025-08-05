@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import React, {  useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import img1 from '../assets/Images/g1.JPG';
@@ -23,6 +23,7 @@ import img16 from '../assets/Images/pw5.JPG';
 import img17 from '../assets/Images/pw6.JPG';
 import img18 from '../assets/Images/pw7.JPG';
 import img19 from '../assets/Images/pw8.JPG';
+import GalleryOverlay from '../components/GalleryOverlay.jsx';
 
 
 
@@ -51,6 +52,7 @@ const Overlay = styled.div`
   height: 90vh;
   box-shadow: 0 0 0 5vw ${(props) => props.theme.text};
   border: 3px solid black;
+  pointer-events: none;
 
   z-index: 11;
 
@@ -160,18 +162,22 @@ const Item = styled.div`
     width: 100%;
     height: auto;
     z-index: 5;
+    cursor: pointer;
   }
 `;
-const Photos = ({ img }) => {
+const Photos = ({ img, onClick }) => {
   return (
-    <Item>
+    <Item onClick={onClick}>
       <img src={img} style={{ objectFit: 'cover' }} alt="gallery_pics" />
       {/* <h2>{name}</h2> */}
     </Item>
   );
 };
 
+const img_list = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19];
+
 const NewArrival = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
    gsap.registerPlugin(ScrollTrigger);
   const ref = useRef(null);
 
@@ -228,6 +234,17 @@ let t1= gsap.timeline();
     };
   }, []);
 
+  
+
+  const handleImageClick = (index) => {
+    setSelectedImage(index);
+    console.log('Image clicked:', index);
+  };
+
+  const handleCloseOverlay = () => {
+    setSelectedImage(null);
+  };
+
   return (
     <Section  ref={ref} id="fixed-target" className="new-arrival">
       <Overlay />
@@ -239,27 +256,9 @@ let t1= gsap.timeline();
       </Title>
 
       <Container ref={ScrollingRef}>
-        <Photos img={img9} name="Accessories" />
-        <Photos img={img10} name="Shoes" />
-        <Photos img={img11} name="Formal Wear" />
-        <Photos img={img12} name="Party Wear" />
-        <Photos img={img1} name="Denim" />
-        <Photos img={img2} name="Cool Dresses" />
-        <Photos img={img3} name="Jackets" />
-        <Photos img={img4} name="T-shirts" />
-        <Photos img={img5} name="Sweatshirts" />
-        <Photos img={img6} name="Sweaters" />
-        <Photos img={img7} name="Pants" />
-        <Photos img={img8} name="Shorts" />
-        <Photos img={img13} name="Party Wear 1" />
-        <Photos img={img14} name="Party Wear 2" />
-        <Photos img={img15} name="Party Wear 3" />
-        <Photos img={img16} name="Party Wear 4" />
-        <Photos img={img17} name="Party Wear 5" />
-        <Photos img={img18} name="Party Wear 6" />
-        <Photos img={img19} name="Party Wear 7" />
-
-        
+        {img_list.map((img, index) => (
+          <Photos key={index} img={img} onClick={() => handleImageClick(index)} />
+        ))}
       </Container>
 
       <Text data-scroll data-scroll-speed="-4">
@@ -277,8 +276,15 @@ We've gathered some of our favorite memories in this photo gallery, and we'd lov
 
 Whether you were with us in person or in spirit, we hope these images bring a little joy to your heart — just like you brought to ours.
       </Text>
+      <GalleryOverlay
+        images={img_list}
+        selectedImage={selectedImage}
+        setSelectedImage={setSelectedImage}
+        onClose={handleCloseOverlay}
+      />
     </Section>
   );
 };
 
 export default NewArrival;
+
