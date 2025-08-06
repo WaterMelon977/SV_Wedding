@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import silo from "../assets/Images/silo.jpg";
+import pw2 from "../assets/Images/namastey.JPG"
 
 const Section = styled.section`
   width: 100%;
@@ -11,10 +12,15 @@ const Section = styled.section`
   align-items: center;
   position: relative;
   background-color: ${props => props.theme.text};
+  background-image: url(${pw2});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   // padding: 1rem;
   
   @media (max-width: 48em) {
     padding: 0.25rem;
+    background-image: none;
     // min-height: 60vh;
   }
 `;
@@ -53,15 +59,16 @@ const EventContainer = styled.div`
   padding: 2rem;
   width: 90%;
   max-width: 500px;
-  min-height: 40vh;
+  min-height: 60vh;
   margin: 0 auto;
   position: relative;
-  background-image: url(${silo});
+  /* Remove background-image for desktop */
+  /* background-image: url(${silo}); */
   background-size: cover;
   background-position: center 20%;
   // border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  // box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,7 +80,7 @@ const EventContainer = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+    // background: rgba(0, 0, 0, 0);
     z-index: 1;
   }
   
@@ -85,7 +92,7 @@ const EventContainer = styled.div`
     backdrop-filter: blur(5px);
     position: relative;
     z-index: 2;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    // border: 1px solid rgba(255, 255, 255, 0);
     
     h3 {
       font-size: ${props => props.theme.fontxl};
@@ -127,6 +134,7 @@ const EventContainer = styled.div`
     min-height: 50vh;
     border-radius: 10px;
     margin: 0 0.5rem;
+    background-image: url(${silo}); /* Only show on mobile */
     
     .event-item {
       // padding: 1rem;

@@ -95,7 +95,7 @@ const Left = styled.div`
   }
 `;
 const Right = styled.div`
-  /* width: 65%; */
+  width: calc(3 * 15rem + 2 * 3rem); /* 3 products, 2 gaps */
   position: absolute;
   left: 35%;
   padding-left: 30%;
@@ -109,9 +109,9 @@ const Right = styled.div`
 
 const Item = styled(motion.div)`
   display: inline-block;
-  width: 20rem;
+  width: 15rem;
   /* background-color: black; */
-  margin-right: 6rem;
+  margin-right: 3rem;
   img {
     width: 100%;
     height: auto;
@@ -125,7 +125,7 @@ const Item = styled(motion.div)`
   }
 
   @media (max-width: 48em) {
-    width: 15rem;
+    width: 12rem;
   }
 `;
 //data-scroll data-scroll-speed="-2" data-scroll-direction="horizontal"
@@ -212,10 +212,14 @@ const Shop = () => {
 
   useLayoutEffect(() => {
     let element = ref.current;
-
     let scrollingElement = Horizontalref.current;
 
-    let pinWrapWidth = scrollingElement.offsetWidth;
+    // Calculate width for 3 products (in px)
+    const itemWidth = 15 * 16; // 15rem to px (assuming 1rem = 16px)
+    const gapWidth = 3 * 16;  // 3rem to px
+    const numProducts = 3;
+    const numGaps = 2;
+    const pinWrapWidth = (itemWidth * numProducts) + (gapWidth * numGaps);
     let t1 = gsap.timeline();
 
     setTimeout(() => {
@@ -227,8 +231,6 @@ const Shop = () => {
           scroller: ".App", //locomotive-scroll
           scrub: 1,
           pin: true,
-          // markers: true,
-          // anticipatePin: 1,
         },
         height: `${scrollingElement.scrollWidth}px`,
         ease: "none",
@@ -241,10 +243,8 @@ const Shop = () => {
           end: `${pinWrapWidth} bottom`,
           scroller: ".App", //locomotive-scroll
           scrub: 1,
-          // markers: true,
         },
         x: -pinWrapWidth,
-
         ease: "none",
       });
       ScrollTrigger.refresh();

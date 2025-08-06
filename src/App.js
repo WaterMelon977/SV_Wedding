@@ -17,6 +17,7 @@ import VenueDetails from "./sections/VenueDetails";
 import VenueMap from "./sections/VenueMap";
 import GlobalStyles from "./styles/GlobalStyles";
 import { dark } from "./styles/Themes";
+import YouTubeLive from "./sections/YouTubeLive";
 
 function App() {
   // useLocoScroll();
@@ -62,8 +63,10 @@ function App() {
               <Home key="home" />
               <Marquee key="marquee" />
               <VenueDetails key="venue" />
+              
               <About key="about" />
               <VenueMap key="venue-map" />
+              <YouTubeLive key="youtube-live" />
               <Shop key="Shop" />
               <NewArrival key="new arrival" />
               
