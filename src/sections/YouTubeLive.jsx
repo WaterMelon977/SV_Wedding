@@ -95,7 +95,7 @@ const YouTubeLive = () => {
   if (isLinkNull) {
     return (
       <Wrapper>
-        <Title>Can't attend the event? You can still join us live and virtually attend the event</Title>
+        <Title>Can't attend the event? You can still join us live and virtually attend it.</Title>
         <Countdown>
           Going live in<br />
           {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s<br />
