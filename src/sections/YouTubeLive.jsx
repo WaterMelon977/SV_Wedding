@@ -94,7 +94,7 @@ const YouTubeLive = () => {
 
   if (isLinkNull) {
     return (
-      <Wrapper>
+      <Wrapper id='wrapper1'>
         <Title>Can't attend the event? You can still join us live and virtually attend it.</Title>
         <Countdown>
           Going live in<br />
@@ -105,7 +105,7 @@ const YouTubeLive = () => {
     );
   }
   return (
-    <Wrapper>
+    <Wrapper id='wrapper1'>
       <Title>Can't attend the event? You can still join us live and virtually attend the event</Title>
       <ResponsiveIframe
         src={YOUTUBELIVELINK}

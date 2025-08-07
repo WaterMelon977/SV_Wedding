@@ -134,9 +134,9 @@ const Marquee = () => {
             style={{ cursor: 'pointer', fontFamily: 'Dancing Script' }}
           whileHover={{ scale: 1.1, y: -5 }}
           whileTap={{ scale: 0.9, y: 0 }}
-          onClick={() => handleScroll('#shop')}
+          onClick={() => handleScroll('#wrapper1')}
           >
-            Jarabala's Invite
+            Watch Live
           </span>
         </Banner>
         <Banner>
