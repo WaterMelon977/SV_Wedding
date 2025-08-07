@@ -31,7 +31,7 @@ const Title = styled.h2`
 `;
 
 const ResponsiveIframe = styled.iframe`
-  width: 100vw;
+  width: 100%;
   max-width: 100%;
   aspect-ratio: 16 / 9;
   min-height: 200px;

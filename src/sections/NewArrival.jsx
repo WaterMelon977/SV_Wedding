@@ -32,6 +32,7 @@ const Section = styled.section`
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow-x: hidden;
 `;
 
 const Container = styled.div`

@@ -15,6 +15,7 @@ import NewArrival from "./sections/NewArrival";
 import Shop from "./sections/Shop";
 import VenueDetails from "./sections/VenueDetails";
 import VenueMap from "./sections/VenueMap";
+import Wishes from "./sections/Wishes";
 import GlobalStyles from "./styles/GlobalStyles";
 import { dark } from "./styles/Themes";
 import YouTubeLive from "./sections/YouTubeLive";
@@ -67,8 +68,10 @@ function App() {
               <About key="about" />
               <VenueMap key="venue-map" />
               <YouTubeLive key="youtube-live" />
+              
               <Shop key="Shop" />
               <NewArrival key="new arrival" />
+              <Wishes key="wishes" />
               
               <Footer key="Footer" />
             </AnimatePresence>

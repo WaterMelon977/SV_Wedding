@@ -11,6 +11,7 @@ const Section = styled.section`
   align-items: center;
   position: relative;
   background-color: ${props => props.theme.body};
+  overflow-x: hidden;
 `;
 
 const MapContainer = styled.div`

@@ -21,6 +21,15 @@ html.has-scroll-smooth {
 *,*::before,*::after{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+html, body, #root, .App {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+img, video, iframe {
+    max-width: 100%;
 }
 body{
     font-family: "Sirin Stencil";

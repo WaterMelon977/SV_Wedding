@@ -95,7 +95,7 @@ const Left = styled.div`
   }
 `;
 const Right = styled.div`
-  width: calc(3 * 15rem + 2 * 3rem); /* 3 products, 2 gaps */
+  width: max-content; /* fit to items width on desktop */
   position: absolute;
   left: 35%;
   padding-left: 30%;
@@ -105,13 +105,17 @@ const Right = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  overflow-x: visible; /* this container drives horizontal animation, but prevent global scroll */
 `;
 
 const Item = styled(motion.div)`
   display: inline-block;
-  width: 15rem;
+  width: 18rem; /* larger images on desktop */
   /* background-color: black; */
   margin-right: 3rem;
+  position: relative; /* Ensure absolutely positioned children anchor to item */
+  text-align: center;
+  padding-bottom: 2.5rem; /* space for label to sit inside item on desktop */
   img {
     width: 100%;
     height: auto;
@@ -126,6 +130,30 @@ const Item = styled(motion.div)`
 
   @media (max-width: 48em) {
     width: 12rem;
+    padding-bottom: 0; /* label becomes static on mobile */
+  }
+`;
+
+const BlessText = styled(motion.h1)`
+  font-family: "Dancing Script";
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+  position: absolute;
+  bottom: 0; /* keep inside item to avoid clipping */
+  left: 50%;
+  transform: translateX(-50%);
+  text-shadow: 0 0 2px rgba(255,255,255,0.5);
+  pointer-events: none; /* keep image click area uninterrupted */
+  z-index: 2;
+
+  @media (max-width: 48em) {
+    position: static;
+    transform: none;
+    bottom: auto;
+    margin-top: 0.75rem;
+    font-size: ${(props) => props.theme.fontsm};
   }
 `;
 //data-scroll data-scroll-speed="-2" data-scroll-direction="horizontal"
@@ -168,34 +196,19 @@ const Product = ({ img, playCheer, stopCheer }) => {
       style={{ cursor: 'pointer' }}
     >
       <img ref={imgRef} width="400" height="600" src={img} alt={title} />
-      <motion.h1 
-        style={{
-          fontFamily: "Dancing Script",
-          display: "block",
-          width: "100%",
-          textAlign: "center",
-          marginTop: "1rem",
-          position: "absolute",
-          bottom: "-2.5rem",
-          // left: "50%",
-          transform: "translateX(-50%)"
-        }}
+      <BlessText
         animate={{
-          scale: [1, 1.1, 1],
+          scale: [1, 1.08, 1],
           textShadow: [
             "0 0 2px rgba(255,255,255,0.5)",
             "0 0 8px rgba(255,215,0,0.8)",
             "0 0 2px rgba(255,255,255,0.5)"
           ]
         }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >
         {title}
-      </motion.h1>
+      </BlessText>
     </Item>
   );
 };
@@ -214,46 +227,95 @@ const Shop = () => {
     let element = ref.current;
     let scrollingElement = Horizontalref.current;
 
-    // Calculate width for 3 products (in px)
-    const itemWidth = 15 * 16; // 15rem to px (assuming 1rem = 16px)
-    const gapWidth = 3 * 16;  // 3rem to px
-    const numProducts = 3;
-    const numGaps = 2;
-    const pinWrapWidth = (itemWidth * numProducts) + (gapWidth * numGaps);
-    let t1 = gsap.timeline();
+    if (!element || !scrollingElement) return;
 
-    setTimeout(() => {
-      t1.to(element, {
+    const waitForImages = (container) =>
+      Promise.all(
+        Array.from(container.querySelectorAll('img')).map((img) =>
+          img.complete
+            ? Promise.resolve()
+            : new Promise((res) => {
+                const cb = () => {
+                  img.removeEventListener('load', cb);
+                  img.removeEventListener('error', cb);
+                  res();
+                };
+                img.addEventListener('load', cb);
+                img.addEventListener('error', cb);
+              })
+        )
+      );
+
+    let tl;
+
+    const createTimeline = () => {
+      if (!element || !scrollingElement) return;
+      if (tl) {
+        tl.kill();
+        tl = undefined;
+      }
+
+      const viewportWidth = element.clientWidth;
+      const isMobile = window.matchMedia('(max-width: 48em)').matches;
+      const leftPercent = isMobile ? 0.4 : 0.35; // matches Left widths
+      const visibleWindow = viewportWidth - viewportWidth * leftPercent;
+      // Scroll enough so the last image can be fully visible within the visible window (right of the fixed left panel)
+      const totalScrollX = Math.max(0, scrollingElement.scrollWidth - visibleWindow);
+
+      // Pin the section and set its height to the horizontal content width
+      tl = gsap.timeline();
+
+      tl.to(element, {
         scrollTrigger: {
           trigger: element,
           start: "top top",
-          end: `${pinWrapWidth} bottom`,
-          scroller: ".App", //locomotive-scroll
+          end: () => `+=${totalScrollX}`,
+          scroller: ".App",
           scrub: 1,
           pin: true,
+          invalidateOnRefresh: true,
         },
-        height: `${scrollingElement.scrollWidth}px`,
+        // Height needs to account for pinning duration: content width + viewport height minus visible area to keep pin until 3rd image fully shows
+        height: () => `${scrollingElement.scrollWidth + window.innerHeight}px`,
         ease: "none",
       });
 
-      t1.to(scrollingElement, {
-        scrollTrigger: {
-          trigger: scrollingElement,
-          start: "top top",
-          end: `${pinWrapWidth} bottom`,
-          scroller: ".App", //locomotive-scroll
-          scrub: 1,
+      tl.to(
+        scrollingElement,
+        {
+          scrollTrigger: {
+            trigger: scrollingElement,
+            start: "top top",
+            end: () => `+=${totalScrollX}`,
+            scroller: ".App",
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+          x: () => -totalScrollX,
+          ease: "none",
         },
-        x: -pinWrapWidth,
-        ease: "none",
-      });
+        0
+      );
+
       ScrollTrigger.refresh();
-    }, 1000);
-    ScrollTrigger.refresh();
+    };
+
+    let isMounted = true;
+    waitForImages(scrollingElement).then(() => {
+      if (!isMounted) return;
+      createTimeline();
+    });
+
+    const onResize = () => {
+      createTimeline();
+    };
+    window.addEventListener('resize', onResize);
 
     return () => {
-      t1.kill();
-      ScrollTrigger.kill();
+      isMounted = false;
+      window.removeEventListener('resize', onResize);
+      if (tl) tl.kill();
+      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
 

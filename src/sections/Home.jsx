@@ -12,7 +12,8 @@ const Logo = React.lazy(() => import('../components/Logo'));
 const Section = styled.section`
   position: relative;
   min-height: 100vh;
-overflow: hidden;
+ overflow: hidden;
+ overflow-x: hidden;
 
 `;
 

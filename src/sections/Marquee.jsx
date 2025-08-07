@@ -10,6 +10,7 @@ const Section = styled.section`
   min-height: 100vh;
   width: 100%;
   margin: 0 auto;
+  overflow-x: hidden;
   
   display: flex;
   justify-content: center;

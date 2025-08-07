@@ -11,7 +11,7 @@ const NavContainer = styled(motion.div)`
   transition: all 0.3s ease;
   /* transform: translateX(-50%); */
   z-index: 6;
-  width: 100vw;
+  width: 100%;
 
   display: flex;
   justify-content: center;
