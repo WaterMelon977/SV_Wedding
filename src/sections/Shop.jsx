@@ -260,7 +260,7 @@ const Shop = () => {
   return (
     <Section ref={ref} id="shop">
       <Title data-scroll data-scroll-speed="-1">
-        Your presence is a gift for us - Jarabala Family
+        Your presence is a gift for us - Jarabhala  Family
       </Title>
       <Left>
         <p>
