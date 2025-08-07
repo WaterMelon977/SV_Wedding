@@ -192,6 +192,29 @@ const Success = styled.div`
   font-family: 'Open Sans', sans-serif;
 `;
 
+const StarsRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+`;
+
+const StarButton = styled.button`
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0.2rem;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 1.6rem;
+  transition: transform 0.12s ease;
+  color: ${(p) => (p.$active ? '#FFC107' : '#D6D6D6')};
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.15));
+
+  &:hover { transform: scale(1.05); }
+  &:focus { outline: 2px solid rgba(230, 57, 70, 0.4); outline-offset: 2px; }
+`;
+
 const spin = keyframes`
   to { transform: rotate(360deg); }
 `;
@@ -213,6 +236,8 @@ const Wishes = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
   const [submitError, setSubmitError] = useState('');
+  const [rating, setRating] = useState(null); // 1-5 or null
+  const [hoverRating, setHoverRating] = useState(null);
 
   const validate = () => {
     const next = {};
@@ -232,9 +257,11 @@ const Wishes = () => {
     try {
       setLoading(true);
       // Try with 'connection' since the API reports 'relation' column doesn't exist
+      const payload = { name, connection: relation, message };
+      if (typeof rating === 'number') payload.rating = rating;
       let { error } = await supabase
         .from('wishes')
-        .insert([{ name, connection: relation, message }]);
+        .insert([payload]);
 
       // If 'message' column doesn't exist, fallback to 'blessings'
       if (error && /could not find the 'message' column|column\s+message\s+does not exist/i.test(error.message)) {
@@ -249,6 +276,7 @@ const Wishes = () => {
       setName('');
       setRelation('Friend');
       setMessage('');
+      setRating(null);
     } catch (err) {
       const reason = err?.message || 'Unknown error';
       setSubmitError(`Something went wrong. Please try again. (${reason})`);
@@ -308,6 +336,34 @@ const Wishes = () => {
                 onChange={(e) => setMessage(e.target.value)}
               />
               {errors.message && <ErrorText>{errors.message}</ErrorText>}
+            </Field>
+          </Row>
+
+          <Row>
+            <Field>
+              <Label as="div">Rate this site (optional)</Label>
+              <StarsRow role="radiogroup" aria-label="Rate this site">
+                {[1,2,3,4,5].map((value) => {
+                  const isActive = (hoverRating ?? rating) >= value;
+                  return (
+                    <StarButton
+                      key={value}
+                      type="button"
+                      $active={isActive}
+                      aria-label={`${value} star${value>1?'s':''}`}
+                      aria-checked={rating === value}
+                      role="radio"
+                      onMouseEnter={() => setHoverRating(value)}
+                      onMouseLeave={() => setHoverRating(null)}
+                      onFocus={() => setHoverRating(value)}
+                      onBlur={() => setHoverRating(null)}
+                      onClick={() => setRating(value)}
+                    >
+                      {isActive ? '★' : '☆'}
+                    </StarButton>
+                  );
+                })}
+              </StarsRow>
             </Field>
           </Row>
 
