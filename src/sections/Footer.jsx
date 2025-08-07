@@ -226,7 +226,7 @@ const Footer = () => {
               target={"_blank"}
               rel="dofollow noreferrer"
             >
-              Santosh & Sumanth 
+              Santhosh & Sumanth 
             </a>
           </span>
         </Bottom>
