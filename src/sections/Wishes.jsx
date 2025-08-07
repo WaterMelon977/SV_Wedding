@@ -93,7 +93,7 @@ const Label = styled.label`
   font-family: 'Open Sans', sans-serif;
 
   &::after {
-    content: ' *';
+    content: ${p => (p.$optional ? "''" : "' *'")};
     color: #e63946;
     font-weight: 700;
   }
@@ -341,7 +341,7 @@ const Wishes = () => {
 
           <Row>
             <Field>
-              <Label as="div">Rate this site (optional)</Label>
+              <Label as="div" $optional>Rate this site (optional)</Label>
               <StarsRow role="radiogroup" aria-label="Rate this site">
                 {[1,2,3,4,5].map((value) => {
                   const isActive = (hoverRating ?? rating) >= value;
