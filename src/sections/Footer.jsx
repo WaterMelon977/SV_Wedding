@@ -195,9 +195,9 @@ const Footer = () => {
           <li aria-hidden="true" onClick={() => handleScroll(".about")}>
             Invite 
           </li>
-          <li aria-hidden="true" onClick={() => handleScroll("#shop")}>
+          {/* <li aria-hidden="true" onClick={() => handleScroll("#shop")}>
             Jarabala's Invite
-          </li>
+          </li> */}
           <li aria-hidden="true" onClick={() => handleScroll(".new-arrival")}>
             Snapshots
           </li>

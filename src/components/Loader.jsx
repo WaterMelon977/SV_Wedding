@@ -147,7 +147,7 @@ const Loader = () => {
         </motion.text>
       </motion.svg>
       <Text style={{ fontFamily: "'Dancing Script', cursive", zIndex: 2 }}>
-        Jarabala's Wedding
+        Jarabhala's Wedding
       </Text>
     </Container>
   );

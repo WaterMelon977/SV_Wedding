@@ -16,6 +16,7 @@ import Shop from "./sections/Shop";
 import VenueDetails from "./sections/VenueDetails";
 import VenueMap from "./sections/VenueMap";
 import Wishes from "./sections/Wishes";
+import Blessings from "./sections/Blessings";
 import GlobalStyles from "./styles/GlobalStyles";
 import { dark } from "./styles/Themes";
 import YouTubeLive from "./sections/YouTubeLive";
@@ -72,6 +73,7 @@ function App() {
               <Shop key="Shop" />
               <NewArrival key="new arrival" />
               <Wishes key="wishes" />
+              <Blessings key="blessings" />
               
               <Footer key="Footer" />
             </AnimatePresence>

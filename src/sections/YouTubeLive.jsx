@@ -11,6 +11,16 @@ const Wrapper = styled.section`
   align-items: center;
   background: #000;
   padding: 1rem 0;
+  
+  /* Ensure full viewport height on mobile */
+  @media (max-width: 599px) {
+    min-height: 100vh;
+    /* Modern viewport unit fallback */
+    min-height: 100dvh;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
 
   @media (min-width: 600px) {
     padding: 2rem 0;
@@ -22,9 +32,15 @@ const Title = styled.h2`
   font-size: 1.2rem;
   font-family: 'Dancing Script', cursive;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-weight: 700;
   letter-spacing: 0.01em;
+  @media (max-width: 599px) {
+    font-size: 1.1rem;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+    padding: 0 0.5rem;
+  }
   @media (min-width: 600px) {
     font-size: 1.5rem;
   }
@@ -39,6 +55,14 @@ const ResponsiveIframe = styled.iframe`
   border-radius: 10px;
   box-shadow: 0 4px 32px rgba(0,0,0,0.3);
   background: #000;
+  
+  @media (max-width: 599px) {
+    width: 92vw;
+    max-width: 92vw;
+    height: auto;
+    /* Ensure it fits within mobile 100vh layout */
+    max-height: 55vh;
+  }
 
   @media (min-width: 600px) {
     width: 90vw;
@@ -60,6 +84,12 @@ const Countdown = styled.div`
   margin-bottom: 2rem;
   font-weight: 900;
   letter-spacing: 0.03em;
+  @media (max-width: 599px) {
+    font-size: 1.8rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
   @media (min-width: 600px) {
     font-size: 3rem;
   }

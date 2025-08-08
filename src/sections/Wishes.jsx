@@ -84,10 +84,10 @@ const Field = styled.div`
 `;
 
 const Label = styled.label`
-  font-size: 1.05rem;
-  color: #111;
+  font-size: 1.15rem;
+  color: #000;
   margin-bottom: 0.4rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.2px;
   line-height: 1.3;
   font-family: 'Open Sans', sans-serif;
@@ -99,7 +99,7 @@ const Label = styled.label`
   }
 
   @media (min-width: 600px) {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
   }
 `;
 
@@ -195,7 +195,7 @@ const Success = styled.div`
 const StarsRow = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   margin-top: 0.25rem;
 `;
 
@@ -203,16 +203,21 @@ const StarButton = styled.button`
   appearance: none;
   border: none;
   background: transparent;
-  padding: 0.2rem;
+  padding: 0.25rem;
   cursor: pointer;
   line-height: 1;
-  font-size: 1.6rem;
+  font-size: 2rem;
   transition: transform 0.12s ease;
-  color: ${(p) => (p.$active ? '#FFC107' : '#D6D6D6')};
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.15));
+  color: ${(p) => (p.$active ? '#FFD700' : '#BDBDBD')};
+  text-shadow: ${(p) => (p.$active ? '0 0 8px rgba(255, 215, 0, 0.45)' : 'none')};
+  filter: ${(p) => (p.$active ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.35))' : 'drop-shadow(0 1px 2px rgba(0,0,0,0.2))')};
 
   &:hover { transform: scale(1.05); }
   &:focus { outline: 2px solid rgba(230, 57, 70, 0.4); outline-offset: 2px; }
+
+  @media (min-width: 600px) {
+    font-size: 2.2rem;
+  }
 `;
 
 const spin = keyframes`
