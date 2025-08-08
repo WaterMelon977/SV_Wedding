@@ -168,44 +168,54 @@ const Blessings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    let isMounted = true;
-    (async () => {
-      try {
-        setLoading(true);
-        setError('');
-        const { data, error } = await supabase
-          .from('wishes')
-          .select('id, name, connection, message, created_at, display')
-          .eq('display', true)
-          .order('created_at', { ascending: false })
-          .limit(50);
+  const fetchItems = async () => {
+    try {
+      setLoading(true);
+      setError('');
+      const { data, error } = await supabase
+        .from('wishes')
+        .select('id, name, connection, message, created_at, display')
+        .eq('display', true)
+        .order('created_at', { ascending: false })
+        .limit(50);
 
-        if (!isMounted) return;
-        if (error) {
-          console.error('Blessings: fetch error', error);
-          setError('Unable to load messages right now.');
-          setItems([]);
-        } else {
-          console.log('Blessings: fetched data', data);
-          const normalized = (data || []).map((row) => ({
+      if (error) {
+        console.error('Blessings: fetch error', error);
+        setError('Unable to load messages right now.');
+        setItems([]);
+      } else {
+        const normalized = (data || [])
+          .map((row) => ({
             id: row.id,
             name: row.name || 'Guest',
             connection: row.connection || 'Well-wisher',
-            message: row.message || row.blessings || '',
-          })).filter((r) => r.message.trim().length > 0);
-          setItems(normalized);
-        }
-      } catch (err) {
-        if (!isMounted) return;
-        console.error('Blessings: unexpected error', err);
-        setError('Something went wrong.');
-        setItems([]);
-      } finally {
-        if (isMounted) setLoading(false);
+            message: row.message || '',
+            created_at: row.created_at,
+          }))
+          .filter((r) => r.message.trim().length > 0);
+        setItems(normalized);
       }
-    })();
-    return () => { isMounted = false; };
+    } catch (err) {
+      console.error('Blessings: unexpected error', err);
+      setError('Something went wrong.');
+      setItems([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
+  useEffect(() => {
+    const onLocalSubmit = () => {
+      fetchItems();
+    };
+    window.addEventListener('wishes:submitted', onLocalSubmit);
+    return () => {
+      window.removeEventListener('wishes:submitted', onLocalSubmit);
+    };
   }, []);
 
   return (

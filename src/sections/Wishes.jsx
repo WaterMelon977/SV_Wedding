@@ -282,6 +282,8 @@ const Wishes = () => {
       setRelation('Friend');
       setMessage('');
       setRating(null);
+      // Notify Blessings to refetch without full app reload
+      try { window.dispatchEvent(new Event('wishes:submitted')); } catch (_) {}
     } catch (err) {
       const reason = err?.message || 'Unknown error';
       setSubmitError(`Something went wrong. Please try again. (${reason})`);
