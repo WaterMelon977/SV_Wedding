@@ -201,10 +201,8 @@ const Footer = () => {
           <li aria-hidden="true" onClick={() => handleScroll(".new-arrival")}>
             Snapshots
           </li>
-          <li>
-            <a href="https://google.com" target={"_blank"} rel="noreferrer">
-              Youtube live
-            </a>
+          <li aria-hidden="true" onClick={() => handleScroll("#wrapper1")}>
+            Watch Live
           </li>
         </ul>
         <Bottom>
