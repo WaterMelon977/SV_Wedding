@@ -131,7 +131,7 @@ const Logo = () => {
         <Text variants={textVariants} initial="hidden" animate="visible"
         style={{ fontFamily: "'Dancing Script', cursive" }}
         >
-          Jarabala's Wedding
+          Jarabhala's Wedding
         </Text>
       </Link>
     </Container>
