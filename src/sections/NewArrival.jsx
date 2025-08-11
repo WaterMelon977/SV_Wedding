@@ -3,9 +3,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import img1 from '../assets/Images/g1.JPG';
+import img2 from '../assets/Images/g2.JPG';
 import img3 from '../assets/Images/g3.JPG';
 import img4 from '../assets/Images/g4.JPG';
 import img5 from '../assets/Images/g5.JPG';
+import img6 from '../assets/Images/g6.JPG';
 import img7 from '../assets/Images/g7.JPG';
 import img8 from '../assets/Images/g8.JPG';
 import img9 from '../assets/Images/g9.JPG';

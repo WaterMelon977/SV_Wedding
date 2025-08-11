@@ -108,7 +108,6 @@ const Logo = () => {
             fill="#e63946"
             stroke="#fff"
             strokeWidth="10"
-            variants={pathVariants}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: [0, 1.2, 1], opacity: 1 }}
             transition={{ duration: 1.2, delay: 1, type: 'spring', stiffness: 180 }}
