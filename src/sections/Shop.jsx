@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
 import useSound from 'use-sound';
 import cheeringSound from '../assets/sounds/Drum.mp3';
@@ -10,8 +10,7 @@ import cheeringSound from '../assets/sounds/Drum.mp3';
 import silo from "../assets/Images/silo.jpg";
 import ring from "../assets/Images/ring.jpg";
 import hero from "../assets/Images/heropic.jpg";
-import bride from "../assets/Images/slide1_bride.jpg";
-import groom from "../assets/Images/slide2_groom.jpg";
+// removed unused: bride, groom imports
 
 
 const Section = styled(motion.section)`
